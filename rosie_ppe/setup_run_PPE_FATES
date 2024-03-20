@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 #==============USER MODS=======================================
-src_dir=/glade/work/afoster/FATES_calibration/CTSM_calib
-dir_tag=/glade/work/afoster/FATES_calibration/FATES_SP_OAAT
+src_dir=/glade/work/rfisher/FATES_calibration/CTSM_calib_branch
+dir_tag=/glade/work/rfisher/FATES_calibration/FATES_SP_OAAT
 case=ctsm51FATES_SP_OAAT
 chargenum=P93300041
-scratch_dir=/glade/derecho/scratch/afoster
-archive_dir=/glade/derecho/scratch/afoster/archive
-datm_dir=/glade/work/afoster/FATES_calibration/user_datm_files
-user_nl_dir=/glade/work/afoster/FATES_calibration/user_nl_files
+scratch_dir=/glade/derecho/scratch/rfisher
+archive_dir=/glade/derecho/scratch/rfisher/archive
+datm_dir=/glade/work/rfisher/FATES_calibration/user_datm_files
+user_nl_dir=/glade/work/rfisher/FATES_calibration/user_nl_files
 
 scenario=SatPhen_derecho
 cyear=2000
@@ -27,7 +27,7 @@ case_path=${dir_tag}/${case_name}
 cd ${src_dir}/cime/scripts
 
 ## create a new case
-./create_newcase --case ${case_path} --compset ${compset} --res f19_g17 --project ${chargenum} --run-unsupported 
+./create_newcase --case ${case_path} --compset ${compset} --res f19_g17  --run-unsupported 
 cd ${case_path}
 
 ## copy user_nl_clm and user_nl_datm_streams into this file
@@ -75,4 +75,5 @@ cp ${user_nl_dir}/user_nl_clm .
 ./preview_namelists
 
 # Build case
-qcmd -- ./case.build
+#qcmd -- ./case.build
+./case.build
