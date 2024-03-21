@@ -9,23 +9,22 @@
 # #########################
 # #########################
 
-
 SAMPLE=$1
 
 ## create file and folder names
 NAME=FATES_SP_PPE_sample_${SAMPLE}
-PARAM_DIR=/glade/work/afoster/FATES_SP/PPE/param_files
+PARAM_DIR=/glade/work/rfisher/FATES_calibration/FATES_SP_OAAT/sp_oaat_paramfiles
 PARAM_FILE=fates_params_${SAMPLE}.nc
 
 ## clone dir
-CLONE_ROOT=/glade/work/afoster/FATES_SP/PPE/cases/FATES_PPE_base_19c57a730_253b6003
+CLONE_ROOT=/glade/work/rfisher/FATES_calibration/FATES_SP_OAAT/ctsm51FATES_SP_OAAT_SatPhen_derecho_2000/
 
 ## these won't change
-CASE_DIR=/glade/work/afoster/FATES_SP/PPE/cases
-SRCDIR=/glade/work/afoster/ctsm_fates
+CASE_DIR=/glade/work/rfisher/FATES_calibration/FATES_SP_OAAT/ensemble_cases
+SRCDIR=/glade/work/rfisher/FATES_calibration/CTSM_calib_branch
 
 ## output directory
-OUT_DIR=/glade/scratch/afoster/FATES_PPE
+OUT_DIR=/glade/scratch/rfisher
 
 ## Cime scripts directory
 base_dir=${SRCDIR}/cime/scripts
@@ -35,7 +34,10 @@ case_name=${CASE_DIR}/${NAME}
 
 ## clone from the base case
 cd ${base_dir}
-./create_clone --case ${case_name} --clone ${CLONE_ROOT} --keepexe --cime-output-root ${OUT_DIR}
+echo "clone"  ${CLONE_ROOT}
+echo "case"  ${case_name}
+./create_clone --case ${case_name} --clone ${CLONE_ROOT} --keepexe
+#--cime-output-root ${OUT_DIR}
 
 cd ${case_name}
 
