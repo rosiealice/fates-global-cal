@@ -12,15 +12,15 @@
 SAMPLE=$1
 
 ## create file and folder names
-NAME=ROSIE_FATES_SP_PPE_sample_${SAMPLE}
+NAME=ROSIE_FATES_NOCOMP_PPE_sample_${SAMPLE}
 PARAM_DIR=/glade/work/rfisher/FATES_calibration/FATES_SP_OAAT/sp_oaat_paramfiles
 PARAM_FILE=FATES_OAAT_${SAMPLE}.nc
 
 ## clone dir
-CLONE_ROOT=/glade/work/rfisher/FATES_calibration/FATES_SP_OAAT/ctsm51FATES_SP_OAAT_uscalibbranch__SatPhen_derecho_2000
+CLONE_ROOT=/glade/work/rfisher/FATES_calibration/FATES_SP_OAAT/ctsm51FATES_SP_OAAT_uscalibbranch_nocomp__SatPhen_derecho_2000
 
 ## these won't change
-CASE_DIR=/glade/work/rfisher/FATES_calibration/FATES_SP_OAAT/ensemble_cases
+CASE_DIR=/glade/work/rfisher/FATES_calibration/FATES_NOCOMP_OAAT/ensemble_cases
 SRCDIR=/glade/work/rfisher/FATES_calibration/CTSM_calib_branch
 
 ## output directory
@@ -47,7 +47,7 @@ cd ${case_name}
 ./xmlchange --id STOP_N --val 20
 ./xmlchange --id STOP_OPTION --val nyears
 ./xmlchange --id REST_OPTION --val nyears
-./xmlchange --id RESUBMIT --val 0
+./xmlchange --id RESUBMIT --val 5
 ./xmlchange --id JOB_WALLCLOCK_TIME --val 02:00:00 --subgroup case.run
 #./xmlchange --id JOB_QUEUE --val economy --subgroup case.run
 
