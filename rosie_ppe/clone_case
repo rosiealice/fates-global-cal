@@ -14,7 +14,7 @@ SAMPLE=$1
 ## create file and folder names
 NAME=ROSIE_FATES_SP_PPE_sample_${SAMPLE}
 PARAM_DIR=/glade/work/rfisher/FATES_calibration/FATES_SP_OAAT/sp_oaat_paramfiles
-PARAM_FILE=FATES_OAAT_${SAMPLE}.nc
+PARAM_FILE= nocomp_oaat_v1_${SAMPLE}.nc
 
 ## clone dir
 CLONE_ROOT=/glade/work/rfisher/FATES_calibration/FATES_SP_OAAT/ctsm51FATES_SP_OAAT_uscalibbranch__SatPhen_derecho_2000

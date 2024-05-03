@@ -10,7 +10,7 @@
 # #########################
 
 ## update this as needed
-NSAMP=25
+NSAMP=250
 
 for ((i=1; i<=${NSAMP}; i++)); do
     ./clone_case_nocomp $i

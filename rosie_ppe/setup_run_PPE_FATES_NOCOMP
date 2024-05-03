@@ -3,7 +3,7 @@
 #==============USER MODS=======================================
 src_dir=/glade/work/rfisher/FATES_calibration/CTSM_calib
 dir_tag=/glade/work/rfisher/FATES_calibration/FATES_SP_OAAT
-case=ctsm51FATES_SP_OAAT_uscalibbranch_nocomp_
+case=ctsm51FATES_SP_OAAT_uscalibbranch_nocomp_warningoff_debugsla
 chargenum=P93300041
 scratch_dir=/glade/derecho/scratch/rfisher
 archive_dir=/glade/derecho/scratch/rfisher/archive
