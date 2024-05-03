@@ -37,10 +37,10 @@ cd ${case_name}
 ./xmlchange --id STOP_N --val 10
 ./xmlchange --id STOP_OPTION --val nyears
 ./xmlchange --id REST_OPTION --val nyears
-./xmlchange --id RESUBMIT --val 3
+./xmlchange --id RESUBMIT --val 6
 ./xmlchange --id JOB_WALLCLOCK_TIME --val 05:00:00 --subgroup case.run
 #./xmlchange --id JOB_QUEUE --val economy --subgroup case.run
-./xmlchange --id CONTINUE_RUN --val TRUE
+./xmlchange --id CONTINUE_RUN --val FALSE
 
 ## submit the case - no need to build
 ./case.submit

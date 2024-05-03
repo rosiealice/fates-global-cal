@@ -10,8 +10,8 @@
 # #########################
 
 ## update this as needed
-NSAMP=250
+NSAMP=240
 
-for ((i=159; i<=${NSAMP}; i++)); do
+for ((i=120; i<=${NSAMP}; i++)); do
     ./clone_case_nocomp_fbg $i
 done

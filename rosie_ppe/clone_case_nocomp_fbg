@@ -12,16 +12,18 @@
 SAMPLE=$1
 
 ## create file and folder names
-NAME=FATES_NOCOMP_FBG_PPE_spbase_nudged_intmaxmin${SAMPLE}
+NAME=FATES_NOCOMP_FBG_PPE_spbase_nudged_atkin_vertsc_dayl_outp${SAMPLE}
 PARAM_DIR=/glade/work/rfisher/FATES_calibration/FATES_NOCOMP_OAAT/paramfiles
-PARAM_FILE=nocomp_oaat_v2_${SAMPLE}.nc
+PARAM_FILE=nocomp_oaat_v5_${SAMPLE}.nc
 
 ## clone dir
-CLONE_ROOT=/glade/work/rfisher/FATES_calibration/FATES_SP_OAAT/ctsm51FATES_SP_OAAT_uscalibbranch_nocomp_warningoff__SatPhen_derecho_2000
+CLONE_ROOT=/glade/work/rfisher/FATES_calibration/FATES_NOCOMP_OAAT/ctsm51FATES_NOCOMP_OAAT_vertsc_dayl_SatPhen_derecho_2000
+#CLONE_ROOT=/glade/work/rfisher/FATES_calibration/FATES_SP_OAAT/ctsm51FATES_SP_OAAT_uscalibbranch_nocomp_warningoff__SatPhen_derecho_2000
 
 ## these won't change
 CASE_DIR=/glade/work/rfisher/FATES_calibration/FATES_NOCOMP_OAAT/ensemble_cases
-SRCDIR=/glade/work/rfisher/FATES_calibration/CTSM_calib_branch
+#SRCDIR=/glade/work/rfisher/FATES_calibration/CTSM_calib_branch
+SRCDIR=/glade/work/rfisher/FATES_calibration/CTSM_main_vertsc_dayl
 
 ## output directory
 OUT_DIR=/glade/scratch/rfisher
@@ -54,7 +56,7 @@ cd ${case_name}
 ./xmlchange --id STOP_N --val 10
 ./xmlchange --id STOP_OPTION --val nyears
 ./xmlchange --id REST_OPTION --val nyears
-./xmlchange --id RESUBMIT --val 3
+./xmlchange --id RESUBMIT --val 6
 ./xmlchange --id JOB_WALLCLOCK_TIME --val 03:00:00 --subgroup case.run
 #./xmlchange --id JOB_QUEUE --val economy --subgroup case.run
 ./xmlchange --id CONTINUE_RUN --val FALSE
