@@ -1,0 +1,15 @@
+"pft","gridcells","num_gridcells"
+"broadleaf evergreen tropical tree","59,66,75,82,84,86,87,88,92,93,113,123,134",13
+"needleleaf evergreen extratrop tree","174,220,227,228,236,240,241,252,254,256,259,273,277,280,283,285,287,297,299,308",20
+"needleleaf colddecid extratrop tree","289,300,301,313",4
+"broadleaf evergreen extratrop tree","",0
+"broadleaf hydrodecid tropical tree","",0
+"broadleaf colddecid extratrop tree","",0
+"broadleaf evergreen extratrop shrub","",0
+"broadleaf hydrodecid extratrop shrub","339",1
+"broadleaf colddecid extratrop shrub","339",1
+"arctic c3 grass","178,179,235,274,310,311,362,366",8
+"cool c3 grass","16,225,229,244",4
+"c4 grass","26,41,45,46,50,63,71,74,78,79,95,122",12
+"c3 crop","133,238,248",3
+"c3 irrigated","",0
