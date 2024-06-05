@@ -10,7 +10,7 @@ archive_dir=/glade/derecho/scratch/rfisher/archive
 datm_dir=/glade/work/rfisher/FATES_calibration/user_datm_files
 user_nl_dir=/glade/work/rfisher/FATES_calibration/user_nl_files
 
-scenario=SatPhen_derecho_pftout
+scenario=SatPhen_derecho
 cyear=2000
 compset=2000_DATM%GSWP3v1_CLM51%FATES_SICE_SOCN_SROF_SGLC_SWAV
 

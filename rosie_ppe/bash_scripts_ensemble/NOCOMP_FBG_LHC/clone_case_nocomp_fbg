@@ -3,7 +3,7 @@
 #
 # #########################
 # Purpose: Clone a case for PPE
-# Author: Adrianna C. Foster
+# Author: Adrianna C. Foster & Rosie Fisher
 # Date: April, 2022
 # bash version 4.2.46
 # #########################
@@ -12,13 +12,14 @@
 SAMPLE=$1
 
 ## create file and folder names
-NAME=FATES_NOCOMP_FBG_PPE_LHC1${SAMPLE}
+NAME=FATES_NOCOMP_FBG_PPE_LHC10_${SAMPLE}
 PARAM_DIR=~/rosiefork_fates_global_cal/rosie_ppe/nocomp_parameter_modification_python/paramfiles/NOCOMP_LHC/
-PARAM_FILE=nocomp_lhc_v1_${SAMPLE}.nc
+PARAM_FILE=nocomp_lhc_v10_${SAMPLE}.nc
 
 ## clone dir
-CLONE_ROOT=/glade/work/rfisher/FATES_calibration/FATES_NOCOMP_OAAT/ctsm51FATES_NOCOMP_OAAT_vertsc_dayl_SatPhen_derecho_2000
+#CLONE_ROOT=/glade/work/rfisher/FATES_calibration/FATES_NOCOMP_LHC/ctsm51FATES_NOCOMP_LHC_3nclmax_SatPhen_derecho_2000
 #CLONE_ROOT=/glade/work/rfisher/FATES_calibration/FATES_SP_OAAT/ctsm51FATES_SP_OAAT_uscalibbranch_nocomp_warningoff__SatPhen_derecho_2000
+CLONE_ROOT=/glade/work/rfisher/FATES_calibration/FATES_NOCOMP_OAAT/ctsm51FATES_NOCOMP_OAAT_vertsc_dayl_SatPhen_derecho_2000
 
 ## these won't change
 CASE_DIR=/glade/work/rfisher/FATES_calibration/FATES_NOCOMP_LHC/ensemble_cases
@@ -60,6 +61,12 @@ cd ${case_name}
 ./xmlchange --id JOB_WALLCLOCK_TIME --val 03:00:00 --subgroup case.run
 #./xmlchange --id JOB_QUEUE --val economy --subgroup case.run
 ./xmlchange --id CONTINUE_RUN --val FALSE
+
+
+rxsfiles=/glade/derecho/scratch/rfisher/${NAME}/run/${NAME}.clm2.r.*
+rhxsfiles=/glade/derecho/scratch/rfisher/${NAME}/run/${NAME}.clm2.rh0.*
+rm -f $rxsfiles
+rm -f rm -f $rhxsfiles
 
 # now we need to update the user_nl_clm file
 #comment out previous paramfile from user_nl_clm

@@ -1,4 +1,3 @@
-
 #!/usr/bin/env bash
 
 #
@@ -12,7 +11,7 @@
 SAMPLE=$1
 
 ## create file and folder names
-NAME=FATES_NOCOMP_FBG_PPE_LHC1${SAMPLE}
+NAME=FATES_NOCOMP_FBG_PPE_LHC6_${SAMPLE}
 CASE_DIR=/glade/work/rfisher/FATES_calibration/FATES_NOCOMP_LHC/ensemble_cases
 
 ## full path of case
@@ -28,7 +27,12 @@ cd ${case_name}
 ./xmlchange --id RESUBMIT --val 3
 ./xmlchange --id JOB_WALLCLOCK_TIME --val 05:00:00 --subgroup case.run
 #./xmlchange --id JOB_QUEUE --val economy --subgroup case.run
-./xmlchange --id CONTINUE_RUN --val TRUE
+./xmlchange --id CONTINUE_RUN --val FALSE
+
+## Remove any existing restart files
+rxsfiles=/glade/derecho/scratch/rfisher/${NAME}/run/${NAME}.clm2.r.*
+echo $rxsfiles
+rm -f $rxsfiles
 
 ## submit the case - no need to build
 ./case.submit
