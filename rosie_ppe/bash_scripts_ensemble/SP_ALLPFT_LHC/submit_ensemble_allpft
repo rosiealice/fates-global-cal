@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+11;rgb:ffff/ffff/ffff
+#
+# #########################
+# Purpose: Submit a bunch of ensembles
+# Author: Adrianna C. Foster
+# Date: April, 2022
+# bash version 4.2.46
+# #########################
+# #########################
+
+## update this as needed
+NSAMP=50
+
+for p in  11  ; do
+    for ((i=14; i<=${NSAMP}; i++)); do
+	./clone_case_sp $i $p
+    done
+done

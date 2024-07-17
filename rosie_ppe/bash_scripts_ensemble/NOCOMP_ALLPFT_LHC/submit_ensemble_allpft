@@ -1,0 +1,20 @@
+
+0;276;0c#!/usr/bin/env bash
+11;rgb:ffff/ffff/ffff
+#
+# #########################
+# Purpose: Submit a bunch of ensembles
+# Author: Adrianna C. Foster
+# Date: April, 2022
+# bash version 4.2.46
+# #########################
+# #########################
+
+## update this as needed
+NSAMP=100
+
+for p in  0 ; do
+    for ((i=1; i<=${NSAMP}; i++)); do
+	./clone_case_nocomp $i $p
+    done
+done

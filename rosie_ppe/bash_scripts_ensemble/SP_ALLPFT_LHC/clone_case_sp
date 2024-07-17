@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+
+#
+# #########################
+# Purpose: Clone a case for PPE
+# Author: Adrianna C. Foster & Rosie Fisher
+# Date: April, 2022
+# bash version 4.2.46
+# #########################
+# #########################
+
+SAMPLE=$1
+PFT=$2
+
+## create file and folder names
+NAME=FATES_SP_LHC_ALLPFTS2_e_${SAMPLE}_PFT_${PFT}
+PARAM_DIR=/glade/u/home/rfisher/rosiefork_fates_global_cal/rosie_ppe/nocomp_parameter_modification_python/paramfiles/SP_LHC/
+ameter_modification_python/intermediate_pfiles/SP_LHC_merge/
+PARAM_FILE=SP_LHC_merge_tag3b_${SAMPLE}.nc
+PARAM_FILE=sp_lhc_v2_${SAMPLE}.nc
+
+## clone dir
+CLONE_ROOT=/glade/work/rfisher/FATES_calibration/FATES_SP_LHC/ctsm51FATES_SP_PFT_SatPhen_derecho_pftout_2000/
+if [[ $PFT == 2 ]]; then
+    CLONE_ROOT=/glade/work/rfisher/FATES_calibration/FATES_SP_LHC/ctsm51FATES_SP_PFT_16proc_SatPhen_derecho_pftout_2000
+fi
+## these won't change
+CASE_DIR=/glade/work/rfisher/FATES_calibration/FATES_SP_LHC/
+SRCDIR=/glade/work/rfisher/FATES_calibration/CTSM_main_vertsc_dayl
+
+## output directory
+OUT_DIR=/glade/derecho/scratch/rfisher
+
+## Cime scripts directory
+base_dir=${SRCDIR}/cime/scripts
+
+## full path of case
+case_name=${CASE_DIR}/${NAME}
+
+## clone from the base case
+cd ${base_dir}
+echo "clone"  ${CLONE_ROOT}
+echo "case"  ${case_name}
+#if [ -d $casename]
+#then
+#  echo ' case already exists',$casename
+#else
+ echo 'making case', $case_name
+rm -rf $case_name
+echo "remove " $OUT_DIR/$NAME
+rm -rf $OUT_DIR/$NAME
+ls -lrt $OUT_DIR/$NAME
+ 
+./create_clone --case ${case_name} --clone ${CLONE_ROOT} --keepexe
+#--cime-output-root ${OUT_DIR}
+
+cd ${case_name}
+
+./case.setup
+
+## these options are reset in the clone
+./xmlchange --id STOP_N --val 4
+./xmlchange --id STOP_OPTION --val nyears
+./xmlchange --id REST_OPTION --val nyears
+./xmlchange --id RESUBMIT --val 0
+./xmlchange --id JOB_WALLCLOCK_TIME --val 02:00:00 --subgroup case.run
+#./xmlchange --id JOB_QUEUE --val economy --subgroup case.run
+./xmlchange --id CONTINUE_RUN --val FALSE
+./xmlchange --id PROJECT --val P93300041
+
+meshroot="/glade/work/rfisher/FATES_calibration/mesh_files/"
+echo "meshroot" $meshroot/pft${PFT}_
+meshfile=($meshroot/pft${PFT}_*)
+echo "meshfile " $PFT $meshfile 	     
+./xmlchange MASK_MESH=$meshfile
+./xmlchange ATM_DOMAIN_MESH=$meshfile
+./xmlchange LND_DOMAIN_MESH=$meshfile
+
+rxsfiles=/glade/derecho/scratch/rfisher/${NAME}/run/${NAME}.clm2.r.*
+rhxsfiles=/glade/derecho/scratch/rfisher/${NAME}/run/${NAME}.clm2.rh0.*
+rm -f $rxsfiles
+rm -f rm -f $rhxsfiles
+
+# now we need to update the user_nl_clm file
+#comment out previous paramfile from user_nl_clm
+:> user_nl_clm.tmp
+while read line; do
+    if [[ $line != *"fates_paramfile"* ]]; then
+        echo $line>>user_nl_clm.tmp
+    else
+	echo '!'$line>>user_nl_clm.tmp
+    fi
+done<user_nl_clm
+mv user_nl_clm.tmp user_nl_clm
+echo "use_fates_fixed_biogeog=.true.">>user_nl_clm
+echo "use_fates_nocomp=.true.">>user_nl_clm
+
+#append correct paramfile
+pfile=${PARAM_DIR}/${PARAM_FILE}
+pfilestr="fates_paramfile = '"$pfile"'"
+echo -e "\n"$pfilestr >> user_nl_clm
+
+
+## submit the case - no need to build
+./case.submit
